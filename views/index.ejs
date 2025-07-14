@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Головна сторінка</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body data-theme="<%= theme %>">
+<h1 class="heading">Ласкаво просимо на сайт!</h1>
+
+  <% if (req.user) { %>
+    <p>Вітаємо, <%= req.user.name %>!</p>
+    <a href="/logout">Вийти</a>
+    <form action="/users/delete" method="POST" onsubmit="return confirm('Ви впевнені, що хочете видалити свій акаунт?');">
+      <button type="submit" class="action-link">Видалити мій акаунт</button>
+    </form>
+  <% } else { %>
+    <a href="/login">Увійти</a> |
+    <a href="/register">Зареєструватися</a>
+  <% } %>
+  
+<p>Оберіть розділ:</p>
+<ul class="content-list">
+  <li class="list-item"><a href="/users">Автори</a></li>
+  <li class="list-item"><a href="/articles">Статті</a></li>
+</ul>
+
+<form action="/toggle-theme" method="POST" class="theme-toggle-form">
+  <input type="hidden" name="returnTo" value="<%= req.originalUrl %>">
+  <button type="submit">
+    Перемкнути на <%= theme === 'dark' ? 'світлу' : 'темну' %> тему
+  </button>
+</form>
+
+
+
+
+</body>
+</html>

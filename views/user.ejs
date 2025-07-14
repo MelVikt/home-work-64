@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= user.name %></title>
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body data-theme="<%= theme %>">
+<h1 class="heading"><%= user.name %></h1>
+<p class="job-title"><%= user.bio %></p>
+<p>Вік: <%= (user.age !== undefined && user.age !== null) ? user.age : 'невідомо' %></p>
+
+<div class="photo-container">
+  <% if (user.photo) { %>
+    <img class="profile-photo" src="<%= user.photo %>" alt="Photo of <%= user.name %>">
+  <% } else { %>
+    <div class="photo-placeholder">Фото відсутнє</div>
+  <% } %>
+</div>
+
+<h2>Статті:</h2>
+<% if (req.user) { %>
+  <a class="action-link" href="/articles/create">+ Нова стаття</a>
+<% } %>
+<ul class="content-list">
+  <% articles.forEach(article => { %>
+    <li class="list-item">
+      <a href="/users/<%= user.id %>/articles/<%= article.id %>?from=user">
+        <%= article.title %>
+      </a>
+    </li>
+  <% }) %>
+</ul>
+
+<a class="action-link" href="/users">Назад до авторів</a>
+
+<form action="/toggle-theme" method="POST" class="theme-toggle-form">
+  <input type="hidden" name="returnTo" value="<%= req.originalUrl %>">
+  <button type="submit">
+    Перемкнути на <%= theme === 'dark' ? 'світлу' : 'темну' %> тему
+  </button>
+</form>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Нова стаття</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body data-theme="<%= theme %>">
+<h1 class="heading">Створити нову статтю</h1>
+
+<form action="/articles/create" method="POST" class="form">
+  <div class="form-group">
+    <input name="title" placeholder="Заголовок" required />
+    <small class="form-hint">Введіть назву статті</small>
+  </div>
+  <div class="form-group">
+    <textarea name="content" rows="8" placeholder="Вміст статті" required></textarea>
+    <small class="form-hint">Напишіть текст статті</small>
+  </div>
+  <button class="accept" type="submit">Опублікувати</button>
+</form>
+
+<a class="action-link" href="/articles">← Назад до списку статей</a>
+
+<form action="/toggle-theme" method="POST" class="theme-toggle-form">
+  <input type="hidden" name="returnTo" value="<%= req.originalUrl %>">
+  <button type="submit">
+    Перемкнути на <%= theme === 'dark' ? 'світлу' : 'темну' %> тему
+  </button>
+</form>
+</body>
+</html>

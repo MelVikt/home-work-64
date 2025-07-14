@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= article.title %></title>
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body data-theme="<%= theme %>">
+<div class="box-article">
+  <h1 class="heading"><%= article.title %></h1>
+  <p class="text-user">Автор: <a href="/users/<%= user.id %>"><%= user.name %></a></p>
+  <div class="text-content"><%= article.content %></div>
+
+  <% if (req.user && req.user._id.toString() === user._id.toString()) { %>
+    <form action="/articles/<%= article.id %>/delete" method="POST" style="display: inline;">
+      <button class="action-link" onclick="return confirm('Ви впевнені, що хочете видалити цю статтю?')">
+        🗑️ Видалити
+      </button>
+    </form>
+
+    <a class="action-link" href="/articles/<%= article.id %>/edit">✏️ Редагувати</a>
+  <% } %>
+
+  <% if (from === 'list') { %>
+    <a class="action-link" href="/articles">Назад до списку статей</a>
+  <% } else { %>
+    <a class="action-link" href="/users/<%= user.id %>">Назад до автора</a>
+  <% } %>
+</div>
+
+<form action="/toggle-theme" method="POST" class="theme-toggle-form">
+  <input type="hidden" name="returnTo" value="<%= req.originalUrl %>">
+  <button type="submit">
+    Перемкнути на <%= theme === 'dark' ? 'світлу' : 'темну' %> тему
+  </button>
+</form>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Відновити пароль</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body data-theme="<%= theme %>">
+<h1 class="heading">Запит на скидання пароля</h1>
+<form method="POST" action="/reset" class="form">
+  <div class="form-group">
+    <input name="username" placeholder="Ваш email (логін)" required />
+    <small class="form-hint">Введіть email, з яким ви реєструвалися</small>
+  </div>
+  <button class="accept" type="submit">Надіслати посилання</button>
+</form>
+</body>
+</html>

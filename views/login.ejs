@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Вхід</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body data-theme="<%= theme %>">
+<h1 class="heading">Вхід</h1>
+<% if (error) { %>
+  <p class="error"><%= error %></p>
+<% } %>
+<form method="POST" action="/login" class="form">
+  <div class="form-group">
+    <input name="username" placeholder="Username or email" required autocomplete="username" />
+    <small class="form-hint">Введіть ваш логін або email</small>
+  </div>
+
+  <div class="form-group">
+    <input type="password" name="password" placeholder="Пароль" required autocomplete="current-password" />
+    <small class="form-hint">Введіть пароль</small>
+  </div>
+
+  <button class="accept" type="submit">Увійти</button>
+</form>
+
+
+<div class="form__footer">
+  <a href="/auth/forgot-password">Забули пароль?</a>
+</div>
+
+<a class="action-link" href="/auth/google">Увійти через Google</a>
+<a class="action-link" href="/register">Зареєструватися</a>  
+<a class="action-link" href="/">На головну</a>
+
+<form action="/toggle-theme" method="POST" class="theme-toggle-form" style="margin-top: 20px;">
+  <input type="hidden" name="returnTo" value="<%= req.originalUrl %>">
+  <button type="submit">
+    Перемкнути на <%= theme === 'dark' ? 'світлу' : 'темну' %> тему
+  </button>
+</form>
+</body>
+</html>

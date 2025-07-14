@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Всі статті</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body data-theme="<%= theme %>">
+<h1 class="heading-lg">Всі статті</h1>
+<% if (req.user) { %>
+  <a class="action-link" href="/articles/create">+ Нова стаття</a>
+<% } %>
+<ul class="content-list">
+  <% articles.forEach(article => { %>
+    <li class="list-item-articles">
+      <a href="/users/<%= article.userId %>/articles/<%= article.id %>?from=list">
+        <%= article.title %> (автор: <%= article.author %>)
+      </a>
+    </li>
+  <% }) %>
+</ul>
+<a class="action-link" href="/">На головну</a>
+
+
+<form action="/toggle-theme" method="POST" class="theme-toggle-form">
+  <input type="hidden" name="returnTo" value="<%= req.originalUrl %>">
+  <button type="submit">
+    Перемкнути на <%= theme === 'dark' ? 'світлу' : 'темну' %> тему
+  </button>
+</form>
+
+</body>
+</html>

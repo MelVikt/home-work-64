@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Реєстрація</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body data-theme="<%= theme %>">
+<h1 class="heading">Реєстрація</h1>
+<form method="POST" action="/register" class="form">
+  <div class="form-group">
+    <input name="name" placeholder="Імʼя (видно на головній)" required />
+    <small class="form-hint">Введіть ваше ім’я</small>
+  </div>
+  <div class="form-group">
+    <input name="username" placeholder="Username" required />    
+    <small class="form-hint">Введіть ваш логін</small>
+  </div>
+  <div class="form-group">
+    <input type="password" name="password" placeholder="Пароль" required />
+    <small class="form-hint">Введіть ваш пароль</small>
+  </div>
+  <button class="accept" type="submit">Зареєструватися</button>
+</form>
+<a href="/auth/google" class="action-link">Зареєструватися через Google</a>
+<a class="action-link" href="/login">Логін</a>
+<a class="action-link" href="/">На головну</a>
+
+<form action="/toggle-theme" method="POST" class="theme-toggle-form">
+<input type="hidden" name="returnTo" value="<%= req.originalUrl %>">
+<button type="submit">
+  Перемкнути на <%= theme === 'dark' ? 'світлу' : 'темну' %> тему
+</button>
+</form>
+</body>
+</html>
